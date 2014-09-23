@@ -1,0 +1,17 @@
+{
+    "contents" : "best <- function(state, outcome) {\n        ## Read outcome data\n        data_frame <- read.csv(\"outcome-of-care-measures.csv\")\n        \n        ## Check that state and outcome are valid\n        if (!(state %in% unique(data_frame[,\"State\"]))) {\n                stop (\"invalid state\")\n        }\n        if (!(outcome %in% c(\"heart failure\", \"heart attack\", \"pneumonia\"))) {\n                stop (\"invalid outcome\")\n        }\n        \n        ## Return hospital name in that state with lowest 30-day death\n        ## rate\n        \n}",
+    "created" : 1411501308266.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3727009371",
+    "id" : "F042B9B9",
+    "lastKnownWriteTime" : 1411507627,
+    "path" : "C:/Data/priv/prg/git/Programming Assignment 3/best.R",
+    "project_path" : "best.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
