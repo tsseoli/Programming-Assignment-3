@@ -1,0 +1,16 @@
+{
+    "contents" : "complete <- function(directory, id = 1:332) {\n        ## 'directory' is a character vector of length 1 indicating\n        ## the location of the CSV files\n        \n        ## 'id' is an integer vector indicating the monitor ID numbers\n        ## to be used\n        \n        ## Return a data frame of the form:\n        ## id nobs\n        ## 1  117\n        ## 2  1041\n        ## ...\n        ## where 'id' is the monitor ID number and 'nobs' is the\n        ## number of complete cases\n        \n        #creates a list of files\n        files_list <- list.files(directory, full.names=TRUE)\n        \n        ## create empty Data Frame with headings\n        dat <- data.frame(id = as.integer(), nobs = as.integer())\n                \n        #loops through the files, analyzing them\n        for (i in id) { \n                myfile <- read.csv(files_list[i])\n                \n                nobs <- 0\n                \n                for (j in 2:length(myfile$\"Date\")) {\n                        if (!is.na(myfile[j,2])) {\n                                if (!is.na(myfile[j,3])) {\n                                        nobs <- nobs + 1\n                                }\n                        }\n                }\n                \n                ColumnNames <- names(dat)\n                dat <- rbind(dat, c(i, nobs))\n                names(dat) <- ColumnNames\n        }\n        dat\n}",
+    "created" : 1411599433690.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1957321487",
+    "id" : "2E5FDA00",
+    "lastKnownWriteTime" : 1410865059,
+    "path" : "C:/Data/priv/prg/coursera/RProgramming/complete.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
