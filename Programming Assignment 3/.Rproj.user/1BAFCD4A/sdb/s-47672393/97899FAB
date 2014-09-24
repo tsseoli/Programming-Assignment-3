@@ -1,0 +1,17 @@
+{
+    "contents" : "rankhospital <- function(state, outcome, num = \"best\") {\n        ## Read outcome data\n        \n        data_frame <- read.csv(\"outcome-of-care-measures.csv\", colClasses = \"character\")\n        \n        ## Check that state and outcome are valid\n        # check for state\n        if (!(state %in% unique(data_frame[,\"State\"]))) {\n                stop (\"invalid state\")\n        }\n        \n        ## check for outcome\n        if (outcome == \"heart failure\") {\n                selCol = 17\n        } else {\n                if (outcome == \"heart attack\") {\n                        selCol = 11\n                } else {\n                        if (outcome == \"pneumonia\") {\n                                selCol = 23\n                        } else {\n                                stop (\"invalid outcome\")\n                        }\n                }\n        }\n        \n        ## Return hospital name in that state with the given rank\n        ## 30-day death rate\n        \n        # select rows with correct state\n        data_frame <- data_frame[data_frame$State == state,]\n        \n        # convert to numeric for sorting\n        suppressWarnings(data_frame[, selCol] <- as.numeric(data_frame[, selCol]))\n        \n        # Omit NA\n        data_frame <- na.omit(data_frame)\n        # data_frame <- data_frame[!is.na(data_frame[, selCol],)\n        \n        # Sort\n        data_frame <-data_frame[order(data_frame[,selCol], data_frame$Hospital.Name),]\n        \n        # convert the expressions \"best\" and \"worst\" into numerical values\n        if (num == \"best\") {\n                num <- 1\n        } else {\n                if (num == \"worst\") {\n                        num <- length(data_frame[,1])\n                } \n        }\n\n        # handle \"overflow\"\n        if (num > length(data_frame[,1])) {\n                return(NA)\n        } else {\n                # return the hospital with corresponding rank\n                return (data_frame[num, 2])\n        }\n        \n}",
+    "created" : 1411568437800.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1958481869",
+    "id" : "97899FAB",
+    "lastKnownWriteTime" : 1411591228,
+    "path" : "C:/Data/priv/prg/git/Programming Assignment 3/rankhospital.R",
+    "project_path" : "rankhospital.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
